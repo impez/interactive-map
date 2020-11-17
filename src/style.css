@@ -1,0 +1,30 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#container{
+    display: absolute;
+    height: 100vh;
+}
+
+path{
+    opacity: 0 !important;
+    transition: 0.2s fill-opacity;
+}
+
+path:hover{
+    opacity: 1 !important;
+    fill-opacity: 1 !important;
+    transform: translateY(-1px);
+    cursor: pointer;
+    transition: 0.2s transform, 0.5s fill-opacity;
+}
+
+svg{
+    position: absolute;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+}
