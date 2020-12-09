@@ -1,10 +1,11 @@
 let CUR_ZOOM = 1,
     MIN_ZOOM = 1,
-    MAX_ZOOM = 5,
+    MAX_ZOOM = 6,
     ORIGINAL_WIDTH,
     ORIGINAL_HEIGHT,
     LIMIT_X,
     LIMIT_Y,
+    ZOOM_RATIO = 0.25,
     image = document.querySelector("image"),
     x = 10;
 
@@ -42,19 +43,21 @@ const init = () => {
     const { width, height } = svg.getBBox();
     const [ clientWidth, clientHeight ] = [ window.innerWidth, window.innerHeight ];
 
+    navigator.userAgent.split(" ").forEach(sen => {if(sen.includes("Firefox")) MAX_ZOOM=4.75});
+
     a.zoomAtPoint(1, {x: 0, y: 0})
 
     ORIGINAL_WIDTH = width;
     ORIGINAL_HEIGHT = height;
-    MIN_ZOOM = 2.35;
-    CUR_ZOOM = 2.35;
+    MIN_ZOOM = 2.5;
+    CUR_ZOOM = 2.5;
 
     a.zoomAtPoint(MIN_ZOOM, {x: 0, y: 0});
     LIMIT_X = clientWidth - ORIGINAL_WIDTH * CUR_ZOOM;
     LIMIT_Y = clientHeight - ORIGINAL_HEIGHT * CUR_ZOOM;
     a.setMinZoom(MIN_ZOOM);
 
-    svgViewport.style.transition = "0.6s transform ease-out";
+    svgViewport.style.transition = "0.5s transform ease-out";
 }
 
 var beforePan = function(oldPan, newPan){
@@ -78,7 +81,7 @@ window.addEventListener("wheel", e => {
     const oldWidth = ORIGINAL_WIDTH * CUR_ZOOM;
     const oldHeight = ORIGINAL_HEIGHT * CUR_ZOOM;
 
-    CUR_ZOOM = e.deltaY < 0 ? CUR_ZOOM += 0.25 : CUR_ZOOM -= 0.25;
+    CUR_ZOOM = e.deltaY < 0 ? CUR_ZOOM += ZOOM_RATIO : CUR_ZOOM -= ZOOM_RATIO;
     CUR_ZOOM = CUR_ZOOM < MIN_ZOOM ? MIN_ZOOM : (CUR_ZOOM > MAX_ZOOM ? MAX_ZOOM : CUR_ZOOM);
 
     const newWidth = ORIGINAL_WIDTH * CUR_ZOOM;

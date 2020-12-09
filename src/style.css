@@ -6,20 +6,23 @@ html, body{
 
 #container{
     display: absolute;
-    height: 100vh;
+    height: 105vh;
 }
 
 path{
-    opacity: 0 !important;
-    transition: 0.2s fill-opacity;
+    opacity: 0.5 !important;
+    transition: 0.2s transform, 0.5s fill-opacity, 0.5s stroke-width, 0.5s opacity;
 }
 
 path:hover{
     opacity: 1 !important;
     fill-opacity: 1 !important;
-    transform: translateY(-1px);
+    stroke: rgb(255, 255, 255) !important;
+    fill: rgb(65, 15, 15) !important;
+    stroke-width: 2px !important;
+    transform: translateY(-3px);
     cursor: pointer;
-    transition: 0.2s transform, 0.5s fill-opacity;
+    opacity: 1 !important;
 }
 
 svg{
